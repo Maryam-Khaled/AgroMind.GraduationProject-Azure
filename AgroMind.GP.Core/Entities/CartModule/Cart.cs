@@ -3,7 +3,7 @@
 	public class Cart
 	{
 		
-		public string Id { get; set; }  // will be the Redis Key ( Farmer.Id or a GUID for anonymous)
+	   public required string Id { get; set; }  // will be the Redis Key ( Farmer.Id or a GUID for anonymous)
 		public List<CartItem> Items { get; set; } = new List<CartItem>();
 
 		
