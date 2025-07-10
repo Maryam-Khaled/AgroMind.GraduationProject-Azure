@@ -5,14 +5,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using AgroMind.GP.Core.Contracts.Specifications.Contract;
 namespace AgroMind.GP.Core.Specification
 {
-	public class StageSpecification : BaseSpecifications<CropStage, int>
+	public class StageSpecification : BaseSpecifications<CropStage, int>, ISpecification<CropStage, int>
 	{
 		//For Get All Stagess
 		public StageSpecification() : base()
 		{
-			AddInclude(s => s.Steps);
+		   AddInclude(s => s.Steps!);
 
 
 
@@ -21,7 +22,7 @@ namespace AgroMind.GP.Core.Specification
 		//Get Stage By Id
 		public StageSpecification(int id) : base(c => c.Id == id && !c.IsDeleted)
 		{
-			AddInclude(s => s.Steps);
+		   AddInclude(s => s.Steps!);
 		}
 
 		// 3. Constructor for Loading Stage Graph for Update/Recalculation
@@ -31,8 +32,8 @@ namespace AgroMind.GP.Core.Specification
 		{
 			if (forUpdate)
 			{
-				AddInclude(s => s.Steps); // Include steps for stage recalculation
-				AddInclude(s => s.Crop);  // Include parent crop to check PlanType for actuals calculations
+			   AddInclude(s => s.Steps!); // Include steps for stage recalculation
+			   AddInclude(s => s.Crop!);  // Include parent crop to check PlanType for actuals calculations
 			}
 		}
 

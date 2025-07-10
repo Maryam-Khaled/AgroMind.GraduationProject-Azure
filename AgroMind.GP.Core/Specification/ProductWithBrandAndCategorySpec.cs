@@ -1,9 +1,10 @@
 ﻿using AgroMind.GP.Core.Entities.ProductModule;
 using Shared;
 
+using AgroMind.GP.Core.Contracts.Specifications.Contract;
 namespace AgroMind.GP.Core.Specification
 {
-	public class ProductWithBrandAndCategorySpec : BaseSpecifications<Product, int>
+	public class ProductWithBrandAndCategorySpec : BaseSpecifications<Product, int>, ISpecification<Product, int>
 	{
 		//For Get All Products
 		public ProductWithBrandAndCategorySpec(ProductQueryParams queryParams)
@@ -15,17 +16,17 @@ namespace AgroMind.GP.Core.Specification
 
 		{
 		
-			AddInclude(p => p.Brand);
-			AddInclude(p => p.Category);
+		   AddInclude(p => p.Brand!);
+		   AddInclude(p => p.Category!);
 			//Includes.Add(p => p.Supplier);
 
 			switch (queryParams. sortingOptions)
 			{
 				case ProductSortingOptions.NameAscending:
-					AddOrderBy(P=>P.Name);
+				   AddOrderBy(P=>P.Name!);
 					break;
 				case ProductSortingOptions.NameDescending:
-					AddOrderByDescending(P => P.Name);
+				   AddOrderByDescending(P => P.Name!);
 					break;
 				case ProductSortingOptions.PriceAscending:
 					AddOrderBy(P => P.Price);
@@ -44,8 +45,8 @@ namespace AgroMind.GP.Core.Specification
 		//Get Product By Id
 		public ProductWithBrandAndCategorySpec(int id) : base(p => p.Id == id && !p.IsDeleted)
 		{
-		    AddInclude(p => p.Brand);
-			AddInclude(p => p.Category);
+		   AddInclude(p => p.Brand!);
+		   AddInclude(p => p.Category!);
 			//Includes.Add(p => p.Supplier);
 		}
 	}

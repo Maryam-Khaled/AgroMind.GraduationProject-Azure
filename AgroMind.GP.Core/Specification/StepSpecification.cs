@@ -7,9 +7,10 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
+using AgroMind.GP.Core.Contracts.Specifications.Contract;
 namespace AgroMind.GP.Core.Specification
 {
-	public class StepSpecification :BaseSpecifications<Step,int>
+	public class StepSpecification :BaseSpecifications<Step,int>, ISpecification<Step, int>
 	{
 		//Get AllSteps
 		public StepSpecification() : base(s => !s.IsDeleted)
@@ -19,7 +20,7 @@ namespace AgroMind.GP.Core.Specification
 		//2. Get  Step By Id
 		public StepSpecification(int id):base(s=>s.Id==id && !s.IsDeleted)
 		{
-			AddInclude(s => s.Stage); // Include parent stage
+		   AddInclude(s => s.Stage!); // Include parent stage
 		}
 
 
@@ -29,12 +30,12 @@ namespace AgroMind.GP.Core.Specification
 		{
 			if (forUpdate)
 			{
-				AddInclude(s => s.Stage);
+			   AddInclude(s => s.Stage!);
 				StringIncludes.Add("Stage.Steps");
-				AddInclude(s => s.Stage.Crop);
+			   AddInclude(s => s.Stage.Crop!);
 				StringIncludes.Add("Stage.Crop.Stages");
 				StringIncludes.Add("Stage.Crop.Stages.Steps");
-				AddInclude(s => s.Stage.Crop.Land); // For authorization check
+			   AddInclude(s => s.Stage.Crop.Land!); // For authorization check
 			}
 		}
 	}
