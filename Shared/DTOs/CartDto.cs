@@ -8,7 +8,7 @@ namespace Shared.DTOs
 {
 	public class CartDto
 	{
-		public string Id { get; set; } // Cart ID / User ID
+	   public required string Id { get; set; } // Cart ID / User ID
 		public List<CartItemDto> Items { get; set; } = new List<CartItemDto>();
 		public decimal TotalPrice { get; set; } // Calculated total
 	}

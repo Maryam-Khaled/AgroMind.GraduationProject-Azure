@@ -5,6 +5,6 @@ namespace AgroMind.GP.APIs.DTOs.IdentityDtos
     public class ForgetPasswordDTO
     {
 
-        public string Email { get; set; }
+        public required string Email { get; set; }
     }
 }

@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 
 namespace AgroMind.GP.Core.Specification
 {
-	public class BaseSpecifications<TEntity, Tkey> : ISpecification<TEntity, Tkey> where TEntity : BaseEntity<Tkey>
+public class BaseSpecifications<TEntity, TKey> : ISpecification<TEntity, TKey> where TEntity : AgroMind.GP.Core.Entities.BaseEntity<TKey>
 	{
 
 
@@ -34,8 +34,8 @@ namespace AgroMind.GP.Core.Specification
 		#endregion
 
 		#region Sorting
-		public Expression<Func<TEntity, object>> OrderBy { get; private set; }
-		public Expression<Func<TEntity, object>> OrderByDescending { get; private set; }
+	   public Expression<Func<TEntity, object>>? OrderBy { get; private set; }
+	   public Expression<Func<TEntity, object>>? OrderByDescending { get; private set; }
 
 		protected void AddOrderBy(Expression<Func<TEntity, object>> orderByExpression) => OrderBy = orderByExpression;
 

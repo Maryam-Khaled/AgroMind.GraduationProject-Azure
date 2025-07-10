@@ -9,10 +9,10 @@ namespace Shared.DTOs
 {
 	public class PlanInfoDto
 	{
-		public CropDto Crop { get; set; }
-		public string CreatorEmail { get; set; }
-		public string CreatorRole { get; set; }
-		public string PlanType { get; set; }
+	   public required CropDto Crop { get; set; }
+	   public required string CreatorEmail { get; set; }
+	   public required string CreatorRole { get; set; }
+	   public required string PlanType { get; set; }
 	}
 
 }
