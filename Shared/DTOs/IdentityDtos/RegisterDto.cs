@@ -5,35 +5,42 @@ namespace AgroMind.GP.APIs.DTOs.IdentityDtos
 	public class RegisterDTO
 	{
 
-		[Required]
-		public string fname { get; set; } // Changed from Fname for consistency
+
+
+
+
+
+
+
 
 		[Required]
-		public string lname { get; set; } // Changed from Lname for consistency
+		public required string fname { get; set; } // Changed from Fname for consistency
 
 		[Required]
-		public string userName { get; set; }
+		public required string lname { get; set; } // Changed from Lname for consistency
 
+		[Required]
+		public required string userName { get; set; }
 
 		[Required]
 		[EmailAddress]
-		public string email { get; set; }
+		public required string email { get; set; }
 
 		[Required]
 		[Phone]
-		public string phoneNumber { get; set; }
+		public required string phoneNumber { get; set; }
 
 		[Required]
-		public string gender { get; set; }
+		public required string gender { get; set; }
 
 		[Required]
-		public int age { get; set; }
-		public string role { get; set; } // Changed from role
+		public required int age { get; set; }
+		public required string role { get; set; } // Changed from role
 
-		public string password { get; set; }
+		public required string password { get; set; }
 
 		[Compare("password")]
-		public string confirmPassword { get; set; }
+		public required string confirmPassword { get; set; }
 
 		//[Required]
 		//[RegularExpression(

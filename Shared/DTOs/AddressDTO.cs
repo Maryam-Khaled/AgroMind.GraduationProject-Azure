@@ -8,7 +8,7 @@ namespace Shared.DTOs
 {
 	public class AddressDTO
 	{
-		public string Id { get; set; } 
+		public required string Id { get; set; }
 		public string? Fname { get; set; } // who will receive order
 
 		public string? Lname { get; set; }
