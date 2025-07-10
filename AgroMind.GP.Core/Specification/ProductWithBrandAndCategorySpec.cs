@@ -16,17 +16,19 @@ namespace AgroMind.GP.Core.Specification
 
 		{
 
-			AddInclude(p => p.Brand!);
-			AddInclude(p => p.Category!);
+			if (typeof(Product).GetProperty("Brand") != null)
+				AddInclude(p => p.Brand);
+			if (typeof(Product).GetProperty("Category") != null)
+				AddInclude(p => p.Category);
 			//Includes.Add(p => p.Supplier);
 
 			switch (queryParams.sortingOptions)
 			{
 				case ProductSortingOptions.NameAscending:
-					AddOrderBy(P => P.Name!);
+					AddOrderBy(P => P.Name ?? string.Empty);
 					break;
 				case ProductSortingOptions.NameDescending:
-					AddOrderByDescending(P => P.Name!);
+					AddOrderByDescending(P => P.Name ?? string.Empty);
 					break;
 				case ProductSortingOptions.PriceAscending:
 					AddOrderBy(P => P.Price);
@@ -45,8 +47,10 @@ namespace AgroMind.GP.Core.Specification
 		//Get Product By Id
 		public ProductWithBrandAndCategorySpec(int id) : base(p => p.Id == id && !p.IsDeleted)
 		{
-			AddInclude(p => p.Brand!);
-			AddInclude(p => p.Category!);
+			if (typeof(Product).GetProperty("Brand") != null)
+				AddInclude(p => p.Brand);
+			if (typeof(Product).GetProperty("Category") != null)
+				AddInclude(p => p.Category);
 			//Includes.Add(p => p.Supplier);
 		}
 	}
