@@ -11,22 +11,22 @@ namespace AgroMind.GP.Core.Specification
 			: base(p => (!queryParams.BrandId.HasValue || p.BrandId == queryParams.BrandId)
 		&& (!queryParams.CategoryId.HasValue || p.CategoryId == queryParams.CategoryId) && (!p.IsDeleted)
 			&& (string.IsNullOrWhiteSpace(queryParams.SearchValue) || (p.Name.ToLower().Contains(queryParams.SearchValue.ToLower()))))
-			
+
 		// Filters products by BrandId and CategoryId if provided, otherwise includes all.
 
 		{
-		
-		   AddInclude(p => p.Brand!);
-		   AddInclude(p => p.Category!);
+
+			AddInclude(p => p.Brand!);
+			AddInclude(p => p.Category!);
 			//Includes.Add(p => p.Supplier);
 
-			switch (queryParams. sortingOptions)
+			switch (queryParams.sortingOptions)
 			{
 				case ProductSortingOptions.NameAscending:
-				   AddOrderBy(P=>P.Name!);
+					AddOrderBy(P => P.Name!);
 					break;
 				case ProductSortingOptions.NameDescending:
-				   AddOrderByDescending(P => P.Name!);
+					AddOrderByDescending(P => P.Name!);
 					break;
 				case ProductSortingOptions.PriceAscending:
 					AddOrderBy(P => P.Price);
@@ -38,15 +38,15 @@ namespace AgroMind.GP.Core.Specification
 				default:
 					break;
 			}
-			
-			
+
+
 		}
 
 		//Get Product By Id
 		public ProductWithBrandAndCategorySpec(int id) : base(p => p.Id == id && !p.IsDeleted)
 		{
-		   AddInclude(p => p.Brand!);
-		   AddInclude(p => p.Category!);
+			AddInclude(p => p.Brand!);
+			AddInclude(p => p.Category!);
 			//Includes.Add(p => p.Supplier);
 		}
 	}

@@ -13,7 +13,7 @@ namespace AgroMind.GP.Core.Specification
 		//For Get All Stagess
 		public StageSpecification() : base()
 		{
-		   AddInclude(s => s.Steps!);
+			AddInclude(s => s.Steps!);
 
 
 
@@ -22,7 +22,7 @@ namespace AgroMind.GP.Core.Specification
 		//Get Stage By Id
 		public StageSpecification(int id) : base(c => c.Id == id && !c.IsDeleted)
 		{
-		   AddInclude(s => s.Steps!);
+			AddInclude(s => s.Steps!);
 		}
 
 		// 3. Constructor for Loading Stage Graph for Update/Recalculation
@@ -32,8 +32,8 @@ namespace AgroMind.GP.Core.Specification
 		{
 			if (forUpdate)
 			{
-			   AddInclude(s => s.Steps!); // Include steps for stage recalculation
-			   AddInclude(s => s.Crop!);  // Include parent crop to check PlanType for actuals calculations
+				AddInclude(s => s.Steps!); // Include steps for stage recalculation
+				AddInclude(s => s.Crop!);  // Include parent crop to check PlanType for actuals calculations
 			}
 		}
 

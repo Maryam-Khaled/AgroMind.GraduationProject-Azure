@@ -7,11 +7,11 @@ namespace AgroMind.GP.Core.Specification
 	public class CropSpecification : BaseSpecifications<Crop, int>, ISpecification<Crop, int>
 	{
 		// 1. Constructor for Get All Crops 
-		public CropSpecification() : base(c=>!c.IsDeleted)
+		public CropSpecification() : base(c => !c.IsDeleted)
 		{
 			//Includes.Add(c => c.Farmer);
 			//Includes.Add(c => c.Land);
-		   AddInclude(c => c.Stages!);
+			AddInclude(c => c.Stages!);
 			StringIncludes.Add("Stages.Steps");
 
 		}
@@ -19,7 +19,7 @@ namespace AgroMind.GP.Core.Specification
 		// 2. Constructor for Get Crop By Id (specific ID)
 		public CropSpecification(int id) : base(c => c.Id == id && !c.IsDeleted)
 		{
-		   AddInclude(c => c.Stages!);
+			AddInclude(c => c.Stages!);
 			StringIncludes.Add("Stages.Steps");
 		}
 
@@ -45,10 +45,10 @@ namespace AgroMind.GP.Core.Specification
 			 &&
 			 (request.Budget >= c.TotalEstimatedCost);
 
-		   AddInclude(c => c.Stages!);
+			AddInclude(c => c.Stages!);
 			StringIncludes.Add("Stages.Steps");
 
-		   AddOrderBy(c => c.TotalEstimatedCost!); // Sort by total cost ascending	
+			AddOrderBy(c => c.TotalEstimatedCost!); // Sort by total cost ascending	
 
 		}
 
@@ -59,10 +59,10 @@ namespace AgroMind.GP.Core.Specification
 		{
 			if (includeCreatorInfo)
 			{
-			   AddInclude(c => c.Creator!); // Include the AppUser who created the crop
-			   AddInclude(c => c.Land!);    // Include Land to determine if it's a FarmerPlan and get FarmerId
+				AddInclude(c => c.Creator!); // Include the AppUser who created the crop
+				AddInclude(c => c.Land!);    // Include Land to determine if it's a FarmerPlan and get FarmerId
 			}
-		   AddInclude(c => c.Stages!);
+			AddInclude(c => c.Stages!);
 			StringIncludes.Add("Stages.Steps");
 		}
 
@@ -73,9 +73,9 @@ namespace AgroMind.GP.Core.Specification
 		{
 			if (includeCreatorAndLandForAll) // Flag to ensure this specific constructor is used
 			{
-			   AddInclude(c => c.Creator!); // Include the AppUser who created the crop
-			   AddInclude(c => c.Land!);    // Include Land to determine if it's a FarmerPlan
-			   AddInclude(c => c.Stages!);
+				AddInclude(c => c.Creator!); // Include the AppUser who created the crop
+				AddInclude(c => c.Land!);    // Include Land to determine if it's a FarmerPlan
+				AddInclude(c => c.Stages!);
 				StringIncludes.Add("Stages.Steps");
 				// Optional: Add default ordering if beneficial for this view (e.g., by CreationDate)
 				// AddOrderByDescending(c => c.CreatedAt);
@@ -108,22 +108,22 @@ namespace AgroMind.GP.Core.Specification
 
 			)
 		{
-			
-		   AddInclude(c => c.Stages!);
+
+			AddInclude(c => c.Stages!);
 			StringIncludes.Add("Stages.Steps");
-		   AddInclude(c => c.Land!);
+			AddInclude(c => c.Land!);
 		}
 
 		// 7. Constructor for Loading Full Crop Graph for Update/Recalculation (used by UpdateCrops, AdoptRecommendedCropAsync, UpdateActualsForCropAsync)
 		// Includes: Land (for auth), Stages, Steps
-		public CropSpecification( bool forUpdate,int cropId) : base(c => c.Id == cropId && !c.IsDeleted)
+		public CropSpecification(bool forUpdate, int cropId) : base(c => c.Id == cropId && !c.IsDeleted)
 		{
 			if (forUpdate)
 			{
-			   AddInclude(c => c.Stages!);
+				AddInclude(c => c.Stages!);
 				StringIncludes.Add("Stages.Steps");
-			   AddInclude(c => c.Land!); // For authorization check (especially in UpdateActuals)
-			   AddInclude(c => c.Creator!); // Include Creator for AdoptRecommendedCrop audit source
+				AddInclude(c => c.Land!); // For authorization check (especially in UpdateActuals)
+				AddInclude(c => c.Creator!); // Include Creator for AdoptRecommendedCrop audit source
 			}
 		}
 	}
